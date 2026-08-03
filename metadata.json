@@ -1,0 +1,31 @@
+{
+  "name": "ocs-books-preview",
+  "deploy_model": "Direct Cloudflare API upload. The LIVE worker is the source of truth; this repo has no Workers Builds CI. After any change, redeploy the live worker and commit the new worker.js + metadata.json here.",
+  "runtime": {
+    "type": "es_module",
+    "main_module": "worker.js",
+    "script_part_content_type": "application/javascript+module",
+    "compatibility_date": "2024-11-01",
+    "usage_model": "standard"
+  },
+  "bindings": [
+    { "type": "kv_namespace", "name": "OCS_BOOKS", "namespace_id": "a4d731331263462d95fb64096536a179" }
+  ],
+  "secrets": {
+    "APPSCRIPT_URL": "optional - Apps Script /exec URL; enables the Sheet + email forward",
+    "APPSCRIPT_SECRET": "optional - shared secret sent to Apps Script; must match Code.gs SHARED_SECRET",
+    "EXPORT_KEY": "optional - gates GET /export; unset => /export returns 404 (hidden)",
+    "ALERT_WEBHOOK": "optional - POST target for submission-failure alerts"
+  },
+  "routes": ["devinfo.dev/books*", "aimlds.org/books*"],
+  "preview_host": "ocs-preview.devinfo.dev",
+  "kv_key_layout": {
+    "signup:*": "launch-notify captures",
+    "order:*": "signed-copy order captures",
+    "first-edition.pdf": "the free First-Edition PDF served at /read"
+  },
+  "version": "v2 - dual-write (KV durable copy 1 + Apps Script Sheet/email copy 2), mutually backing; secret-gated KV export; graceful degradation when no secrets set",
+  "source_sha256": "8b9d6e3255c7f88994a0aaf89ff407856979cd94252d518e18e42dd28a6ff552",
+  "deployed_at": "2026-08-03T21:33:38Z",
+  "restore": "PUT worker.js to /accounts/<acct>/workers/scripts/ocs-books-preview as multipart: metadata { main_module: 'worker.js', compatibility_date: '2024-11-01', bindings: [OCS_BOOKS above] } + a 'worker.js' part (Content-Type application/javascript+module). Always preserve existing bindings/secrets on redeploy. Verify the deployed source sha256 equals source_sha256."
+}
