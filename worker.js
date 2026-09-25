@@ -13,7 +13,7 @@
 //   EXPORT_KEY -> gates GET /export ; ALERT_WEBHOOK -> failure alerts
 
 const READ_URL = "https://www.town.com/content/file/sh755zjw9tyq40h62dygh93c4x8begcn?secret=91e442fb-f42b-4fb5-b221-6a0d29730d2f";
-const PREVIEW_HOST = "ocs-preview.devinfo.dev";
+const PREVIEW_HOST = "ocs-preview.aimlds.org";
 
 export default {
   async fetch(request, env, ctx) {
