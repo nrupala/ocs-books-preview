@@ -7,7 +7,7 @@ Cloudflare Worker behind the **Outcome Convergence Systems** book landing page. 
 
 It serves the page, the free First-Edition PDF (`/read`), a launch-notify signup, and a signed-copy order intake. `nrupalakolkar.com/books` is a **separate** native worker with its own capture — this repo is only the `.dev` / `aimlds` variant.
 
-> Deploy model: the **live Worker is the source of truth** (deployed directly via the Cloudflare API — no Workers Builds CI on this repo). This repo is the backup + docs. After any change, redeploy the live Worker and commit the new `worker.js` + `metadata.json` here.
+> Deploy model: the **live Worker is the source of truth** (no Workers Builds CI on this repo). Deploy only via `deploy/cf_upload_ocs_books.py`, which routes through the signed-deploy wrapper (`~/workspace/site-integrity/deploy_signed.py`) so every deploy mints a ledger certificate. This repo is the backup + docs. After any change, redeploy the live Worker and commit the new `worker.js` + `metadata.json` here.
 
 ## Durability model (v2) — dual-write, mutually backing
 
