@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+- Licensed: code MIT, site content CC BY-NC 4.0 (owner's devinfo.dev pattern, applied 2026-10-11); canonical MIT text added as `LICENSE`.
+
+
 ### Added
 - Portfolio-certification baseline: `CONTRIBUTING.md` (PR-flow discipline),
   `ATTRIBUTION.md`, and `deploy/cf_upload_ocs_books.py` — signed deploys only,
